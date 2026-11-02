@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Host test harness</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 12px; }
+      iframe { width: 420px; height: 640px; border: 1px solid #888; display: block; margin: 8px 0; }
+      pre { background: #eee; padding: 8px; max-height: 160px; overflow: auto; }
+    </style>
+  </head>
+  <body>
+    <p>
+      Run <code>npm run dev</code>, then open <code>/dev/host-test.html</code>.
+      The game sends READY; the buttons answer with INIT. Set <code>VITE_ALLOWED_PARENT_ORIGINS</code>
+      to this page's origin to test origin filtering.
+    </p>
+    <button data-init='{"version":1}'>INIT without level and payload</button>
+    <button data-init='{"version":1,"level":1,"payload":{"game":"karticka"}}'>INIT level 1</button>
+    <button data-init='{"version":1,"level":2,"payload":{"pieceCount":6}}'>INIT level 2, 6 pieces</button>
+    <button data-init='{"version":1,"payload":"nonsense"}'>INIT invalid payload</button>
+    <iframe id="game" src="/"></iframe>
+    <pre id="log"></pre>
+    <script>
+      const frame = document.getElementById('game');
+      const log = document.getElementById('log');
+      window.addEventListener('message', (e) => {
+        if (e.source === frame.contentWindow) log.textContent += JSON.stringify(e.data) + '\n';
+      });
+      document.querySelectorAll('button').forEach((b) =>
+        b.addEventListener('click', () =>
+          frame.contentWindow.postMessage({ type: 'INIT', ...JSON.parse(b.dataset.init) }, location.origin),
+        ),
+      );
+    </script>
+  </body>
+</html>

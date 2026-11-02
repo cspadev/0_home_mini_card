@@ -1,0 +1,53 @@
+{
+  "games": [
+    {
+      "name": "karticka",
+      "title": "Poskládej kartu",
+      "texts": {
+        "hint": "Přetáhni dílky na kartu",
+        "hintRotate": "Klepnutím na dílek ho otočíš"
+      },
+      "rounds": [
+        {
+          "name": "Lehká",
+          "badgeColor": "#7ee0a2",
+          "image": "img/karta.png",
+          "cardTemplate": "img/karta_empty.png",
+          "pieces": 8,
+          "rotation": false,
+          "background": true,
+          "expectedTimeSec": 20,
+          "maxTimeFactor": 3,
+          "minScore": 50,
+          "snapDistance": 0.2
+        },
+        {
+          "name": "Střední",
+          "badgeColor": "#6fc3ff",
+          "image": "img/karta.png",
+          "cardTemplate": "img/karta_empty.png",
+          "pieces": 12,
+          "rotation": false,
+          "background": false,
+          "expectedTimeSec": 30,
+          "maxTimeFactor": 4,
+          "minScore": 20,
+          "snapDistance": 0.2
+        },
+        {
+          "name": "Těžká",
+          "badgeColor": "#ffcc00",
+          "image": "img/karta.png",
+          "cardTemplate": "img/karta_empty.png",
+          "pieces": 12,
+          "rotation": true,
+          "background": false,
+          "expectedTimeSec": 30,
+          "maxTimeFactor": 5,
+          "minScore": 10,
+          "snapDistance": 0.2
+        }
+      ]
+    }
+  ]
+}
